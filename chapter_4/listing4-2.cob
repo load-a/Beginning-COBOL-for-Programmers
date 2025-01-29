@@ -1,0 +1,41 @@
+IDENTIFICATION DIVISION.
+PROGRAM-ID. Listing4-2.
+
+ENVIRONMENT DIVISION.
+
+DATA DIVISION.
+WORKING-STORAGE SECTION.
+01 Num1 	PIC 9 VALUE 5.
+01 Num2 	PIC 9 VALUE 4.
+01 Result 	PIC --9.99 VALUE ZEROS.
+
+01 Operation PIC A.
+88 ValidOperation VALUE "+", "-", "*", "/".
+
+PROCEDURE DIVISION.
+Main-Logic.
+DISPLAY "Enter a single digit number: " WITH NO ADVANCING
+ACCEPT Num1
+
+DISPLAY "Enter a single digit number: " WITH NO ADVANCING
+ACCEPT Num2
+
+DISPLAY "Enter an operation (+, -, *, /): " WITH NO ADVANCING
+ACCEPT Operation
+
+EVALUATE Operation
+WHEN "+"
+	ADD Num1 TO Num2 GIVING Result
+WHEN "-"
+	SUBTRACT Num2 FROM Num1 GIVING Result
+WHEN "*"
+	MULTIPLY Num1 BY Num2 GIVING Result
+WHEN "/" 
+	DIVIDE Num1 BY Num2 GIVING Result
+WHEN OTHER
+	DISPLAY "ERROR: INVALID OPERATION"
+END-EVALUATE
+
+DISPLAY "The result: " Num1 SPACE Operation SPACE Num2 " = " Result
+
+STOP RUN.
